@@ -13,3 +13,7 @@
 ## 0.0.4 - 2024-06-01
 
 - code documentation added.
+
+## 0.0.5 - 2024-06-01
+
+- topics added, docs fixes.
