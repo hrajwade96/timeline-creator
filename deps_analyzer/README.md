@@ -24,4 +24,4 @@ dev_dependencies:
 
 ### Step 2:
 
-Execute the command: 'deps_analyzer'
+Execute the command: 'analyze_deps'

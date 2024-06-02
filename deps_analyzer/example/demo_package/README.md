@@ -20,5 +20,5 @@ dev_dependencies:
 ## Run command
 
 ```shell
-deps_list
+analyze_deps
 ```
