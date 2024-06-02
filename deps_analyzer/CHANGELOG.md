@@ -9,3 +9,7 @@
 ## 0.0.3 - 2024-06-01
 
 - minor fixes.
+
+## 0.0.4 - 2024-06-01
+
+- code documentation added.
