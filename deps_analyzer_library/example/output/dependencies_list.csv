@@ -1,0 +1,6 @@
+Dependency Name,Current Version(s),Latest Version
+flutter,sdk: flutter,0.0.20
+http,^1.2.1,1.2.1
+glob,^2.0.1,2.1.2
+path,^1.8.0,1.9.0
+yaml,^3.1.0,3.1.2
