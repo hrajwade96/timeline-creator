@@ -10,6 +10,10 @@ import 'package:yaml/yaml.dart';
 
 const projectPackage = 'project package';
 
+/// Finds the root directory of the current Git repository.
+///
+/// Uses the `git rev-parse --show-toplevel` command to find the root directory.
+/// Throws an [Exception] if the command fails.
 Future<String> findGitRepositoryRoot() async {
   try {
     var result = await Process.run('git', ['rev-parse', '--show-toplevel']);
@@ -22,6 +26,12 @@ Future<String> findGitRepositoryRoot() async {
   }
 }
 
+/// Fetches the latest version of the given package from pub.dev.
+///
+/// If the [versionInfo] contains `{path:}` or [packageName] contains
+/// 'mystiq', it returns the [projectPackage] constant.
+///
+/// Throws an error if the fetch fails.
 Future<String> fetchLatestVersion(
     String packageName, String versionInfo) async {
   final url = Uri.parse('https://pub.dev/api/packages/$packageName');
@@ -38,12 +48,19 @@ Future<String> fetchLatestVersion(
   }
 }
 
+/// Checks if the given [filePath] should be ignored based on the [pathsToIgnore].
+///
+/// Uses the Glob package to match patterns in the [pathsToIgnore] list.
 bool shouldIgnore(String filePath, List<String> pathsToIgnore) =>
     pathsToIgnore.any((ignorePattern) {
       final glob = Glob(ignorePattern);
       return glob.matches(filePath);
     });
 
+/// Finds dependencies in the project and generates output files.
+///
+/// Scans the project for `pubspec.yaml` files, fetches the latest versions
+/// of dependencies from pub.dev, and generates CSV, JSON, and text reports.
 Future<void> findDependencies() async {
   final repoRoot = await findGitRepositoryRoot();
   final glob = Glob(path.join(repoRoot, '**/pubspec.yaml'));
@@ -103,6 +120,9 @@ Future<void> findDependencies() async {
   await generateTextFile(allDependencies, latestVersions);
 }
 
+/// Generates a CSV file listing all dependencies and their versions.
+///
+/// The file is saved in the `output` directory.
 Future<void> generateCsvFile(Map<String, Set<String>> allDependencies,
     Map<String, String> latestVersions) async {
   final outputDir = Directory('output');
@@ -122,6 +142,9 @@ Future<void> generateCsvFile(Map<String, Set<String>> allDependencies,
   await sink.close();
 }
 
+/// Generates a JSON file listing all dependencies and their versions.
+///
+/// The file is saved in the `output` directory.
 Future<void> generateJsonFile(Map<String, Set<String>> allDependencies,
     Map<String, String> latestVersions) async {
   final outputDir = Directory('output');
@@ -141,6 +164,9 @@ Future<void> generateJsonFile(Map<String, Set<String>> allDependencies,
   await jsonFile.writeAsString(jsonEncode(jsonContent));
 }
 
+/// Generates a text file listing all dependencies and their versions.
+///
+/// The file is saved in the `output` directory.
 Future<void> generateTextFile(Map<String, Set<String>> allDependencies,
     Map<String, String> latestVersions) async {
   final outputDir = Directory('output');
