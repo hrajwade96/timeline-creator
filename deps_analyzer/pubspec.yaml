@@ -19,6 +19,15 @@ dev_dependencies:
 executables:
   analyze_deps: deps_list
 
+topics:
+  - dart
+  - dependencies
+  - analysis
+  - cli
+  - pubspec
+  - tools
+  - list
+  - utilities
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
