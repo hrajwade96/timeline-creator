@@ -24,4 +24,4 @@ dev_dependencies:
 
 ### Step 2:
 
-Execute the command: 'flutter_plugins_list'
+Execute the command: 'deps_analyzer'

@@ -1,4 +1,4 @@
-# Flutter Plugins List Example
+# Deps Analyzer Example
 
 This is a demo package for demonstrating how to use the `deps_analyzer` tool. This tool scans your Flutter project for `pubspec.yaml` files, retrieves the latest versions of dependencies from pub.dev, and generates output files in CSV and JSON formats.
 

@@ -1,5 +1,5 @@
 name: demo_package
-description: "A Sample package to demonstrate plugins_list."
+description: "A Sample package to demonstrate deps_analyzer."
 version: 0.0.1
 
 environment:
