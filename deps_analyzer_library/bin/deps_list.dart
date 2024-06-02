@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:glob/glob.dart';
 import 'package:glob/list_local_fs.dart';
@@ -85,7 +86,7 @@ Future<void> findDependencies() async {
           }
         }
       } catch (e) {
-        print('Error processing ${entity.path}: $e');
+        log('Error processing ${entity.path}: $e');
       }
     }
   }
