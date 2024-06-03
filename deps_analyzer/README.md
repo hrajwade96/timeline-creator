@@ -63,7 +63,7 @@ In any software project, managing dependencies is crucial to ensure that your ap
 
 
 ### CSV Output
-sample CSV output [here](./example/output/dependencies_list.csv).
+sample CSV output [here](https://github.com/hrajwade96/deps_analyzer/blob/main/deps_analyzer/example/output/dependencies_list.csv).
 
 ### JSON Output
 Here’s a sample JSON output:
@@ -84,7 +84,7 @@ Here’s a sample JSON output:
   }
 }
 ```
-sample JSON output [here](./example/output/dependencies_list.json).
+sample JSON output [here](https://github.com/hrajwade96/deps_analyzer/blob/main/deps_analyzer/example/output/dependencies_list.json).
 
 ### Text Output 
-sample Text output [here](./example/output/dependencies_list.txt).
+sample Text output [here](.https://github.com/hrajwade96/deps_analyzer/blob/main/deps_analyzer/example/output/dependencies_list.txt).
