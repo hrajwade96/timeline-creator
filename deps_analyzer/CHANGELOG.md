@@ -17,3 +17,7 @@
 ## 0.0.5 - 2024-06-01
 
 - topics added, docs fixes.
+
+## 0.0.6 - 2024-06-03
+
+- updated docs.
