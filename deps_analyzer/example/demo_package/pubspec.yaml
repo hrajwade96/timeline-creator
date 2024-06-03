@@ -10,17 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.2.1
-  carousel_slider: ^4.2.1
-  json_annotation: ^4.8.1
-  collection: ^1.17.0
-  sms_autofill: 2.3.0
-  intl: ^0.18.0
 
-  lottie: ^2.3.2
-  fast_contacts: ^3.0.3
-  share_plus: ^6.3.0
-  permission_handler: ^10.2.0
-  dotted_border: ^2.0.0+3
 
 dev_dependencies:
   flutter_test:
