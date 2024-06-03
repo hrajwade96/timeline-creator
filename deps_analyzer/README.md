@@ -23,10 +23,10 @@ dart pub global activate deps_analyzer
 ### Use it
 The package has the following executables:
 
-###
 ```dart 
 analyze_deps
 ```
+
 ### OR
 
 ## Use this as a dependency

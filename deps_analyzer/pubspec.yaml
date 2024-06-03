@@ -1,6 +1,6 @@
 name: deps_analyzer
 description: "A tool to fetch and manage Flutter/Dart package dependencies and their versions by scanning pubspec.yaml files."
-version: 0.0.7
+version: 0.0.8
 homepage: https://github.com/hrajwade96/deps_analyzer
 issue_tracker: https://github.com/hrajwade96/deps_analyzer/issues
 
