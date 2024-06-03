@@ -129,7 +129,7 @@ Future<void> generateCsvFile(Map<String, Set<String>> allDependencies,
   if (!await outputDir.exists()) {
     await outputDir.create();
   }
-  final csvFile = File(path.join(outputDir.path, 'dependencies_list.csv'));
+  final csvFile = File(path.join(outputDir.path, 'deps_list.csv'));
   final sink = csvFile.openWrite();
   sink.writeln('Dependency Name,Current Version(s),Latest Version');
 
@@ -151,7 +151,7 @@ Future<void> generateJsonFile(Map<String, Set<String>> allDependencies,
   if (!await outputDir.exists()) {
     await outputDir.create();
   }
-  final jsonFile = File(path.join(outputDir.path, 'dependencies_list.json'));
+  final jsonFile = File(path.join(outputDir.path, 'deps_list.json'));
   final jsonContent = <String, dynamic>{};
 
   allDependencies.forEach((packageName, versions) {
@@ -173,7 +173,7 @@ Future<void> generateTextFile(Map<String, Set<String>> allDependencies,
   if (!await outputDir.exists()) {
     await outputDir.create();
   }
-  final txtFile = File(path.join(outputDir.path, 'dependencies_list.txt'));
+  final txtFile = File(path.join(outputDir.path, 'deps_list.txt'));
   final sink = txtFile.openWrite();
   sink.writeln(
       'Dependencies and their versions/details found across all pubspec.yaml files, including latest versions from pub.dev:');
