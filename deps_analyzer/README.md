@@ -1,4 +1,4 @@
-# Deps List
+# Dependencies Analyzer
 
 `deps_analyzer` is a powerful command-line tool designed to manage Flutter/Dart package dependencies by scanning `pubspec.yaml`
 files in your project directories. It helps you keep track of your dependencies and ensures they are up-to-date by fetching the latest versions from pub.dev.
@@ -10,7 +10,6 @@ files in your project directories. It helps you keep track of your dependencies 
 - **Comprehensive Reports**: Generates a `deps_list.txt` , `deps_list.csv` and `deps_list.json` files listing all dependencies and their versions.
 
 ## Installation
-
 
 ## Global Activation
 ### Install it
@@ -33,7 +32,7 @@ analyze_deps
 ### Step 1: Add to pubspec.yaml
 ```yaml
 dev_dependencies:
-  deps_analyzer: ^0.0.6
+  deps_analyzer: ^0.1.0
 ```
 
 ### Step 2: Add to pubspec.yaml
@@ -87,4 +86,4 @@ Here’s a sample JSON output:
 sample JSON output [here](https://github.com/hrajwade96/deps_analyzer/blob/main/deps_analyzer/example/output/deps_list.json).
 
 ### Text Output 
-sample Text output [here](.https://github.com/hrajwade96/deps_analyzer/blob/main/deps_analyzer/example/output/deps_list.txt).
+sample Text output [here](https://github.com/hrajwade96/deps_analyzer/blob/main/deps_analyzer/example/output/deps_list.txt).
