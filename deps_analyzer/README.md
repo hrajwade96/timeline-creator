@@ -32,7 +32,7 @@ analyze_deps
 ### Step 1: Add to pubspec.yaml
 ```yaml
 dev_dependencies:
-  deps_analyzer: ^0.1.0
+  deps_analyzer: ^0.1.1
 ```
 
 ### Step 2: Add to pubspec.yaml

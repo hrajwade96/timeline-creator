@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:glob/glob.dart';
 import 'package:glob/list_local_fs.dart';
@@ -10,6 +9,11 @@ import 'package:yaml/yaml.dart';
 
 const projectPackage = 'project package';
 
+void safePrint(Object message) {
+  // ignore: avoid_print
+  print(message);
+}
+
 /// Finds the root directory of the current Git repository.
 ///
 /// Uses the `git rev-parse --show-toplevel` command to find the root directory.
@@ -18,32 +22,41 @@ Future<String> findGitRepositoryRoot() async {
   try {
     var result = await Process.run('git', ['rev-parse', '--show-toplevel']);
     if (result.exitCode != 0) {
+      safePrint('git command failed: ${result.stderr}');
       throw Exception('git command failed: ${result.stderr}');
     }
+    safePrint('Found Git repository root: ${result.stdout.toString().trim()}');
     return result.stdout.toString().trim();
   } on ProcessException catch (e) {
+    safePrint('Failed to run git command: $e');
     throw Exception('Failed to run git command: $e');
   }
 }
 
 /// Fetches the latest version of the given package from pub.dev.
 ///
-/// If the [versionInfo] contains `{path:}` or [packageName] contains
-/// 'mystiq', it returns the [projectPackage] constant.
+/// If the [versionInfo] contains `{path:}` or [packageName]
+/// it returns the [projectPackage] constant.
 ///
 /// Throws an error if the fetch fails.
 Future<String> fetchLatestVersion(
     String packageName, String versionInfo) async {
   final url = Uri.parse('https://pub.dev/api/packages/$packageName');
+  safePrint('Fetching latest version for package: $packageName');
   try {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final jsonResponse = jsonDecode(response.body);
+      safePrint(
+          'Fetched latest version for $packageName: ${jsonResponse['latest']['version']}');
       return jsonResponse['latest']['version'].toString();
     } else {
+      safePrint(
+          'Failed to fetch latest version for $packageName: ${response.statusCode}');
       return 'Could not fetch, this could be a project package';
     }
   } catch (e) {
+    safePrint('Error fetching latest version for $packageName: $e');
     return 'Error';
   }
 }
@@ -97,13 +110,20 @@ Future<void> findDependencies() async {
                 }
               }
 
+              if (versionInfo.contains('sdk: flutter')) {
+                safePrint('Skipping flutter SDK dependency');
+                return; // Skip adding flutter SDK version
+              }
+
               allDependencies.putIfAbsent(packageName, () => <String>{});
               allDependencies[packageName]!.add(versionInfo);
+              safePrint(
+                  'Found dependency: $packageName, version: $versionInfo');
             });
           }
         }
       } catch (e) {
-        log('Error processing ${entity.path}: $e');
+        safePrint('Error processing ${entity.path}: $e');
       }
     }
   }
@@ -136,10 +156,13 @@ Future<void> generateCsvFile(Map<String, Set<String>> allDependencies,
   allDependencies.forEach((packageName, versions) {
     final latestVersion = latestVersions[packageName] ?? projectPackage;
     sink.writeln('$packageName,${versions.join(' ')},$latestVersion');
+    safePrint(
+        'Written to CSV: $packageName,${versions.join(' ')},$latestVersion');
   });
 
   await sink.flush();
   await sink.close();
+  safePrint('CSV file generated: ${csvFile.path}');
 }
 
 /// Generates a JSON file listing all dependencies and their versions.
@@ -159,9 +182,12 @@ Future<void> generateJsonFile(Map<String, Set<String>> allDependencies,
       'current_versions': versions.toList(),
       'latest_version': latestVersions[packageName] ?? projectPackage,
     };
+    safePrint(
+        'Written to JSON: $packageName, versions: ${versions.toList()}, latest: ${latestVersions[packageName] ?? projectPackage}');
   });
 
   await jsonFile.writeAsString(jsonEncode(jsonContent));
+  safePrint('JSON file generated: ${jsonFile.path}');
 }
 
 /// Generates a text file listing all dependencies and their versions.
@@ -181,12 +207,17 @@ Future<void> generateTextFile(Map<String, Set<String>> allDependencies,
     final latestVersion = latestVersions[packageName] ?? projectPackage;
     sink.writeln(
         '$packageName: ${versions.join(', ')} (Latest as of now: $latestVersion)');
+    safePrint(
+        'Written to text file: $packageName: ${versions.join(', ')} (Latest as of now: $latestVersion)');
   });
 
   await sink.flush();
   await sink.close();
+  safePrint('Text file generated: ${txtFile.path}');
 }
 
 Future<void> main() async {
+  safePrint('Starting dependency analysis...');
   await findDependencies();
+  safePrint('Dependency analysis completed.');
 }

@@ -1,5 +1,10 @@
 ## 0.1.0 - 2024-06-05
 
+- printed useful logs.
+- minor fix
+
+## 0.1.0 - 2024-06-05
+
 - minor fix.
 - added example section
 
