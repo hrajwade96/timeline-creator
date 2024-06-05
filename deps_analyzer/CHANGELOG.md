@@ -1,4 +1,4 @@
-## 0.1.0 - 2024-06-05
+## 0.1.1 - 2024-06-05
 
 - printed useful logs.
 - minor fix
