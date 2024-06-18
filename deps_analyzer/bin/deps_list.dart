@@ -14,25 +14,6 @@ void safePrint(Object message) {
   print(message);
 }
 
-/// Finds the root directory of the current Git repository.
-///
-/// Uses the `git rev-parse --show-toplevel` command to find the root directory.
-/// Throws an [Exception] if the command fails.
-Future<String> findGitRepositoryRoot() async {
-  try {
-    var result = await Process.run('git', ['rev-parse', '--show-toplevel']);
-    if (result.exitCode != 0) {
-      safePrint('git command failed: ${result.stderr}');
-      throw Exception('git command failed: ${result.stderr}');
-    }
-    safePrint('Found Git repository root: ${result.stdout.toString().trim()}');
-    return result.stdout.toString().trim();
-  } on ProcessException catch (e) {
-    safePrint('Failed to run git command: $e');
-    throw Exception('Failed to run git command: $e');
-  }
-}
-
 /// Fetches the latest version of the given package from pub.dev.
 ///
 /// If the [versionInfo] contains `{path:}` or [packageName]
@@ -75,8 +56,8 @@ bool shouldIgnore(String filePath, List<String> pathsToIgnore) =>
 /// Scans the project for `pubspec.yaml` files, fetches the latest versions
 /// of dependencies from pub.dev, and generates CSV, JSON, and text reports.
 Future<void> findDependencies() async {
-  final repoRoot = await findGitRepositoryRoot();
-  final glob = Glob(path.join(repoRoot, '**/pubspec.yaml'));
+  final currentDir = Directory.current.path;
+  final glob = Glob(path.join(currentDir, '**/pubspec.yaml'));
 
   final pathsToIgnore = <String>[];
   var versionInfo = '';
