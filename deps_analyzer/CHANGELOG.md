@@ -43,3 +43,9 @@
 ## 0.0.1 - 2024-06-01
 
 - Initial version.
+
+Prerelease versions
+
+## 0.1.2-dev - 2024-06-18
+
+- minor fixes
